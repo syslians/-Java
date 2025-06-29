@@ -425,3 +425,133 @@ class Solution {Add commentMore actions
 ### 시간 복잡도 분석하기
 
 N은 행 혹은 열의 길이이며, 두 길이는 같다. `arr1`의 행과 열 수를 `r1`, `c1`이라 하고, `arr2`의 행과 열 수를 `r2`, `c2`라고 했을 때 `r1 * c1 * c2`만큼 연산한다. `r1`, `c1`, `r2`, `c2` 모두 N으로 볼 수 있으므로 최종 시간 복잡도는 `O(N^3)`이다.
+
+## 문제 06 - 실패율
+
+![failture_rate1.png](https://grepp-programmers.s3.amazonaws.com/files/production/bde471d8ac/48ddf1cc-c4ea-499d-b431-9727ee799191.png)
+
+슈퍼 게임 개발자 오렐리는 큰 고민에 빠졌다. 그녀가 만든 프랜즈 오천성이 대성공을 거뒀지만, 요즘 신규 사용자의 수가 급감한 것이다. 원인은 신규 사용자와 기존 사용자 사이에 스테이지 차이가 너무 큰 것이 문제였다.
+
+이 문제를 어떻게 할까 고민 한 그녀는 동적으로 게임 시간을 늘려서 난이도를 조절하기로 했다. 역시 슈퍼 개발자라 대부분의 로직은 쉽게 구현했지만, 실패율을 구하는 부분에서 위기에 빠지고 말았다. 오렐리를 위해 실패율을 구하는 코드를 완성하라.
+
+- 실패율은 다음과 같이 정의한다.
+    - 스테이지에 도달했으나 아직 클리어하지 못한 플레이어의 수 / 스테이지에 도달한 플레이어 수
+
+전체 스테이지의 개수 N, 게임을 이용하는 사용자가 현재 멈춰있는 스테이지의 번호가 담긴 배열 stages가 매개변수로 주어질 때, 실패율이 높은 스테이지부터 내림차순으로 스테이지의 번호가 담겨있는 배열을 return 하도록 solution 함수를 완성하라.
+
+### 제한사항
+
+- 스테이지의 개수 N은 `1` 이상 `500` 이하의 자연수이다.
+- stages의 길이는 `1` 이상 `200,000` 이하이다.
+- stages에는 `1` 이상 `N + 1` 이하의 자연수가 담겨있다.
+    - 각 자연수는 사용자가 현재 도전 중인 스테이지의 번호를 나타낸다.
+    - 단, `N + 1` 은 마지막 스테이지(N 번째 스테이지) 까지 클리어 한 사용자를 나타낸다.
+- 만약 실패율이 같은 스테이지가 있다면 작은 번호의 스테이지가 먼저 오도록 하면 된다.
+- 스테이지에 도달한 유저가 없는 경우 해당 스테이지의 실패율은 `0` 으로 정의한다.
+
+### 입출력 예
+
+| N | stages | result |
+| --- | --- | --- |
+| 5 | [2, 1, 2, 6, 2, 4, 3, 3] | [3,4,2,1,5] |
+| 4 | [4,4,4,4,4] | [4,1,2,3] |
+
+### 풀이 (실패)
+
+```java
+import java.util.*;
+
+class Solution {
+    public int[] solution(int N, int[] stages) {
+        int users = stages.length;
+        
+        // 오름차순으로 정렬
+        Arrays.sort(stages);
+        int stage = 1;
+        int failUsers = 0;
+        double[] failures = new double[N];
+        
+        for (int i = 0; i < stages.length; i++) {
+            if (stage == stages[i]) {
+                // 해당 단계에서 실패한 사람이 있는 경우
+                failUsers++;
+            } else {
+                failures[stage - 1] = failUsers / (double)users;
+                if (failUsers == users) {
+                    failures[stage - 1] = 1;
+                }
+                users -= failUsers;
+                failUsers = 0;
+                stage++;
+                
+                if (stage == stages[i]) {
+                    // 해당 단계에서 실패한 사람이 있는 경우
+                    failUsers++;
+                } 
+            }
+        }
+        
+        // 같은 순위면 스테이지 번호가 작은 순
+        PriorityQueue<Integer> pq = new PriorityQueue<>((o1, o2) -> {
+            if (failures[o1 - 1] > failures[o2 - 1]) {
+                return -1;
+            }
+            
+            if (failures[o1 - 1] < failures[o2 - 1]) {
+                return 1;
+            }
+            
+            if (failures[o1 - 1] == failures[o2 - 1]) {
+                return o1 - o2;
+            }
+            
+            return 0;
+        }); 
+        
+        int[] toArr = new int[N];
+        for (int i = 1; i <= N; i++) {
+            pq.add(i);
+        }
+        
+        int index = 0;
+        while (!pq.isEmpty()) {
+            toArr[index] = pq.poll();
+            index++;
+        }
+        
+        return toArr;
+    }
+}
+
+테스트 1 〉	실패 (1.00ms, 81.2MB)
+테스트 2 〉	통과 (1.57ms, 89.6MB)
+테스트 3 〉	통과 (5.53ms, 73MB)
+테스트 4 〉	통과 (14.98ms, 87MB)
+테스트 5 〉	통과 (25.70ms, 87.5MB)
+테스트 6 〉	실패 (1.67ms, 86.9MB)
+테스트 7 〉	실패 (3.52ms, 75.9MB)
+테스트 8 〉	실패 (21.02ms, 84MB)
+테스트 9 〉	실패 (27.60ms, 105MB)
+테스트 10 〉	실패 (15.29ms, 98.9MB)
+테스트 11 〉	실패 (13.93ms, 103MB)
+테스트 12 〉	실패 (24.75ms, 95.9MB)
+테스트 13 〉	실패 (16.45ms, 97.6MB)
+테스트 14 〉	통과 (1.08ms, 72.1MB)
+테스트 15 〉	통과 (6.70ms, 79.8MB)
+테스트 16 〉	통과 (4.14ms, 91.4MB)
+테스트 17 〉	실패 (7.23ms, 88.9MB)
+테스트 18 〉	실패 (4.69ms, 89.8MB)
+테스트 19 〉	실패 (1.56ms, 75.4MB)
+테스트 20 〉	실패 (4.54ms, 89.8MB)
+테스트 21 〉	실패 (7.25ms, 94.8MB)
+테스트 22 〉	실패 (22.29ms, 91.2MB)
+테스트 23 〉	실패 (7.97ms, 81.4MB)
+테스트 24 〉	실패 (17.94ms, 85.1MB)
+테스트 25 〉	통과 (1.05ms, 82.5MB)
+테스트 26 〉	통과 (1.15ms, 86.6MB)
+테스트 27 〉	통과 (1.05ms, 81.4MB)
+```
+
+### 문제 분석하고 풀기
+
+실패율이란 해당 스테이지에 도달한 적이 있는 사용자 중 아직 클리어하지 못한 사용자의 비율을 의미한다.
