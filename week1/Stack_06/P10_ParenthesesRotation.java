@@ -1,4 +1,4 @@
-package week1.Stack_06;
+package week1.C06_Stack;
 
 import java.util.ArrayDeque;
 import java.util.HashMap;

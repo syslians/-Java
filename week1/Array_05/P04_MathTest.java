@@ -1,4 +1,4 @@
-package week1.Array_05;
+package week1.C05_Array;
 
 import java.util.ArrayList;
 import java.util.Arrays;
