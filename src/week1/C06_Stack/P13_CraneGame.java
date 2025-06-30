@@ -1,4 +1,4 @@
-package week1.C06_Stack;
+package src.week1.C06_Stack;
 
 import java.util.Stack;
 

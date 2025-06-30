@@ -1,4 +1,4 @@
-package week1.C07_Queue;
+package src.week1.C07_Queue;
 
 import java.util.ArrayDeque;
 

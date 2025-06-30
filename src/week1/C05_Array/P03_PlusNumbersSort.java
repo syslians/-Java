@@ -1,9 +1,8 @@
-package week1.C05_Array;
+package src.week1.C05_Array;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class P03_PlusNumbersSort {
     public static void main(String[] args) {
