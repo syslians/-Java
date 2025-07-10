@@ -1,4 +1,4 @@
-package week2.Extra02_TwoPointer;
+package src.week2.Extra02_TwoPointer;
 
 public class E04_SumOfTwoNums {
     public static void main(String[] args) {

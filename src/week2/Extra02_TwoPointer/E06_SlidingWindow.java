@@ -1,4 +1,4 @@
-package week2.Extra02_TwoPointer;
+package src.week2.Extra02_TwoPointer;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,4 +1,4 @@
-package week2.Extra02_TwoPointer;
+package src.week2.Extra02_TwoPointer;
 
 public class E03_ConceptTwoPointer {
     public static void main(String[] args) {

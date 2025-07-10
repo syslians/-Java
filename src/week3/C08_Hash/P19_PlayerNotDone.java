@@ -1,4 +1,4 @@
-package week3.C08_Hash;
+package src.week3.C08_Hash;
 
 import java.util.HashMap;
 
