@@ -1,0 +1,42 @@
+import java.io.BufferedReader;
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine()); // 단어 개수 입력
+        String[] words = new String[N]; // 단어 저장 배열
+
+        // 단어 입력
+        for (int i = 0; i < N; i++) {
+            words[i] = br.readLine();
+        }
+
+        // 1. 길이 우선, 2. 사전순으로 정렬
+        Arrays.sort(words, new Comparator<String>() {
+            @Override
+            public int compare(String s1, String s2) {
+                // 길이가 다르면 길이 오름차순
+                if (s1.length() != s2.length()) {
+                    return s1.length() - s2.length();
+                }
+                // 길이가 같으면 사전순
+                return s1.compareTo(s2);
+            }
+        });
+
+        // 출력 (중복 제거)
+        StringBuilder sb = new StringBuilder();
+        sb.append(words[0]).append('\n'); // 첫 단어 출력
+        for (int i = 1; i < N; i++) {
+            // 이전 단어와 다를 경우에만 출력
+            if (!words[i].equals(words[i - 1])) {
+                sb.append(words[i]).append('\n');
+            }
+        }
+
+        System.out.print(sb); // 결과 출력
+        br.close();
+    }
+}
