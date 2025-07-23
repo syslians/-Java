@@ -12,28 +12,13 @@ import java.util.Set;
 public class BaekJoon1181 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine()); // 첫 줄 N 입력
         Set<String> wordSet = new HashSet<>();
-        String input;
-        System.out.println("단어 입력 ('exit' 입력 시 종료 및 정렬 결과 출력):");
-
-        // 단어 입력 받기 ('exit'이 입력되면 중단)
-        while (true) {
-            input = br.readLine();
-            if (input.equalsIgnoreCase("exit")) {
-                break;
-            }
-            wordSet.add(input);
+        for (int i = 0; i < N; i++) {
+            wordSet.add(br.readLine());
         }
-
-        // Set을 List로 변환 후 정렬
         List<String> words = new ArrayList<>(wordSet);
-        words.sort(Comparator
-                .comparingInt(String::length)
-                .thenComparing(Comparator.naturalOrder())
-        );
-
-        // 출력
-        System.out.println("\n정렬 결과:");
+        words.sort(Comparator.comparingInt(String::length).thenComparing(Comparator.naturalOrder()));
         for (String word : words) {
             System.out.println(word);
         }
