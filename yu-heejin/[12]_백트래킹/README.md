@@ -61,7 +61,7 @@
 ### DFS
 
 
-<img width="632" height="392" src=./image.png" />
+<img width="632" height="392" src="image.png" />
 
 
 - **깊이 우선 탐색**이라고도 부르며, **그래프에서 깊은 부분을 우선적으로 탐색하는 알고리즘**
