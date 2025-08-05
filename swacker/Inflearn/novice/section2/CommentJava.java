@@ -1,6 +1,6 @@
-package Inflearn.novice;
+package Inflearn.novice.section2;
 
-public class CommentJava {
+class CommentJava {
 
     public static void main(String[] args) {
         System.out.println("Hello Java1");  //  Hello Java1을 출력합니다.

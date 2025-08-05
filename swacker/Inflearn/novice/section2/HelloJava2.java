@@ -1,6 +1,6 @@
-package Inflearn.novice;
+package Inflearn.novice.section2;
 
-public class HelloJava2 {
+class HelloJava2 {
 
     public static void main(String[] args) {
         System.out.println("Hello Java1");
