@@ -19,9 +19,13 @@
 
 각 행렬에서 같은 위치에 있는 값끼리 더하거나 빼는 연산이다. 이 연산을 하려면 **사용하는 두 행렬의 크기가 같아야 한다.** 만약 A나 B의 행 또는 열의 크기가 서로 다르면 행렬 덧셈과 뺄셈은 할 수 없다.
 
-행렬 곱셈은 곱셈 순서가 중요하며, A → B 순서로 곱했다면 행렬 A의 행, 행렬 B의 열 크기가 일치해야 하고 곱셈의 결과는 행렬 A의 열, 행렬 B의 행 크기가 된다.
+행렬 곱셈은 곱셈 순서가 중요하며, A → B 순서로 곱했다면 **행렬 A의 행, 행렬 B의 열 크기가 일치해야 하고 곱셈의 결과는 행렬 A의 열, 행렬 B의 행 크기가 된다.**
 
 행렬을 곱할 때는 왼쪽 행렬의 1행과 오른쪽 행렬의 각 열을 각각 곱한다. 이때, 왼쪽 행렬의 행과 오른쪽 행렬의 열은 요소를 각각 곱하여 더하는 식으로 계산한다. 예를 들어, 행렬 A의 1행과 B의 1열의 각 요소를 곱하여 더하면 27이 나오고, 행렬 A의 1행과 B의 2열의 각 요소를 곱하여 더하면 36이 나온다.
+
+$$
+\sum (A[i][j] * B[j][i])
+$$
 
 ### 전치 행렬
 
@@ -146,4 +150,191 @@ class Main {
         return newArr;
     }
 }
+```
+
+## 문제 60 두 행렬을 곱한 후 전치 행렬 만들기
+
+matrix1과 matrix2는 정수값으로 이루어진 3 x 3 행렬입니다. 이 두 행렬을 곱한 결과의 전치 행렬을 반환하는 solution() 함수를 구현해주세요.
+
+### 정답 코드
+
+```java
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+// https://yang-wistory1009.tistory.com/135
+
+class Main {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int[][] matrix1 = {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        };
+
+        int[][] matrix2 = {
+            {9, 8, 7},
+            {6, 5, 4},
+            {3, 2, 1}
+        };
+
+        int[][] newMatrix = multiply(matrix1, matrix2);
+        newMatrix = change(newMatrix);
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print(newMatrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    // 행렬을 곱하고 그 결과를 반환하는 함수
+    private static int[][] multiply(int[][] matrix1, int[][] matrix2) {
+        int[][] newMatrix = new int[3][3];
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                for (int k = 0; k < 3; k++) {
+                    newMatrix[i][j] += (matrix1[i][k] * matrix2[k][j]);
+                }
+            }
+        }
+
+        return newMatrix;
+    }
+
+    // 전치행렬
+    private static int[][] change(int[][] matrix) {
+        int[][] newMatrix = new int[3][3];
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                newMatrix[i][j] = matrix[j][i];
+            }
+        }
+
+        return newMatrix;
+    }
+}
+```
+
+## 문제 61 달팽이 수열 만들기
+
+n을 입력받아 n x n 크기의 2차원 배열을 생성해 달팽이 수열을 채우는 solution() 함수를 구현하세요. 달팽이 수열은 다음과 같이 숫자 1부터 시작해 시계 방향 나선형으로 채우는 수열을 의미한다.
+
+### 제약 조건
+
+- n은 2 이상 10 미만의 자연수이다.
+- 숫자는 배열의 첫 번째 행, 첫 번째 열에서 시작합니다.
+
+### 정답 코드
+
+```java
+import java.util.*;
+import java.io.*;
+
+class Main {
+    public static void main(String[] args) throws Exception {
+        int n = 4;
+
+        int[][] arr = new int[n][n];
+
+        // 회전
+        int row = 0;  // 행
+        int col = 0;  // 열
+        int number = 1;
+        int isAllFilled = 0;
+
+        while (isAllFilled < (n * n)) {
+            // right
+            for (; col < n; col++) {
+                if (arr[row][col] > 0) break;
+                arr[row][col] = number++;
+                isAllFilled++;
+            }
+    
+            col--;
+            row++;
+    
+            // down
+            for (; row < n; row++) {
+                if (arr[row][col] > 0) break;
+                arr[row][col] = number++;
+                isAllFilled++;
+            }
+    
+            row--;
+            col--;
+    
+            // left
+            for (; col >= 0; col--) {
+                if (arr[row][col] > 0) break;
+                arr[row][col] = number++;
+                isAllFilled++;
+            }
+    
+            // up
+            row--;
+            col++;
+            
+            for (; row >= 0; row--) {
+                if (arr[row][col] > 0) break;
+                arr[row][col] = number++;
+                isAllFilled++;
+            }
+
+            row++;
+            col++;
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(arr[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+```
+
+# 14-3 합격자가 되는 모의 테스트
+
+## 문제 62 이진 변환 반복하기
+
+```java
+class Solution {
+    public int[] solution(String s) {
+        StringBuilder sb;
+        int zero1 = 0;
+        int zero2 = 0;
+        
+        while (!s.equals("1")) {
+            sb = new StringBuilder();
+            
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) == '1') sb.append(s.charAt(i));
+                else zero2++;
+            }
+            
+            s = Long.toBinaryString(Long.parseLong(sb.toString()));
+            zero1++;
+        }
+        
+        return new int[] {zero1, zero2};
+    }
+}
+
+Exception in thread "main" java.lang.NumberFormatException: For input string: "111111111111111111111"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:68)
+	at java.base/java.lang.Long.parseLong(Long.java:707)
+	at java.base/java.lang.Long.parseLong(Long.java:832)
+	at Solution.solution(Unknown Source)
+	at SolutionTest.lambda$main$0(Unknown Source)
+	at SolutionTest$SolutionRunner.run(Unknown Source)
+	at SolutionTest.main(Unknown Source)
+
 ```
