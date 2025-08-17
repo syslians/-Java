@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김민수 - 마이크로소프트 취업 포트폴리오</title>
+    <style>
+        :root {
+            --ms-blue: #0078d4;
+            --ms-light-blue: #50a3d9;
+            --ms-gray: #737373;
+            --ms-light-gray: #f3f3f3;
+            --ms-dark: #333;
+            --ms-white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--ms-dark);
+            line-height: 1.6;
+            background-color: var(--ms-white);
+        }
+        
+        a {
+            color: var(--ms-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--ms-light-blue);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--ms-blue);
+            color: var(--ms-white);
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .profile-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .profile-info h2 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .contact-info a {
+            color: var(--ms-white);
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-info a:hover {
+            color: var(--ms-light-gray);
+        }
+        
+        nav {
+            background-color: var(--ms-white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li a {
+            display: block;
+            padding: 20px;
+            color: var(--ms-dark);
+            font-weight: 500;
+        }
+        
+        .nav-links li a:hover {
+            color: var(--ms-blue);
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            display: inline-block;
+            background-color: var(--ms-white);
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 1px;
+            background-color: var(--ms-light-gray);
+            z-index: 0;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .skill-category {
+            background-color: var(--ms-light-gray);
+            border-radius: 8px;
+            padding: 20px;
+            width: 260px;
+        }
+        
+        .skill-category h3 {
+            margin-bottom: 15px;
+            color: var(--ms-blue);
+            text-align: center;
+        }
+        
+        .skill-item {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .star-rating {
+            color: var(--ms-blue);
+        }
+        
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background-color: var(--ms-light-gray);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .project-image {
+            height: 200px;
+            background-color: var(--ms-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ms-white);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .project-info {
+            padding: 20px;
+        }
+        
+        .project-info h3 {
+            margin-bottom: 10px;
+            color: var(--ms-blue);
+        }
+        
+        .project-meta {
+            font-size: 0.9rem;
+            color: var(--ms-gray);
+            margin-bottom: 10px;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin: 10px 0;
+        }
+        
+        .tech-tag {
+            background-color: var(--ms-blue);
+            color: var(--ms-white);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .project-links a {
+            padding: 5px 10px;
+            border: 1px solid var(--ms-blue);
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .project-links a:hover {
+            background-color: var(--ms-blue);
+            color: var(--ms-white);
+        }
+        
+        .education-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--ms-blue);
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 12px;
+            width: 2px;
+            height: calc(100% + 18px);
+            background-color: var(--ms-light-gray);
+        }
+        
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-header h3 {
+            color: var(--ms-blue);
+        }
+        
+        .timeline-date {
+            color: var(--ms-gray);
+        }
+        
+        .activities-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .activity-card {
+            background-color: var(--ms-light-gray);
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .activity-card h3 {
+            color: var(--ms-blue);
+            margin-bottom: 10px;
+        }
+        
+        .activity-card ul {
+            list-style-position: inside;
+            margin-top: 10px;
+        }
+        
+        .activity-card ul li {
+            margin-bottom: 5px;
+        }
+        
+        .languages-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .language-item {
+            text-align: center;
+            width: 150px;
+        }
+        
+        .language-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .language-level {
+            color: var(--ms-gray);
+        }
+        
+        .interests-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .interest-item {
+            background-color: var(--ms-light-gray);
+            border-radius: 8px;
+            padding: 15px;
+            width: 200px;
+            text-align: center;
+        }
+        
+        .interest-item h3 {
+            color: var(--ms-blue);
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            background-color: var(--ms-dark);
+            color: var(--ms-white);
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            margin-top: 20px;
+        }
+        
+        .footer-links a {
+            color: var(--ms-white);
+            margin: 0 10px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--ms-light-blue);
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            color: var(--ms-gray);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .profile-info h1 {
+                font-size: 2rem;
+            }
+            
+            .profile-info h2 {
+                font-size: 1.1rem;
+            }
+            
+            .nav-links li a {
+                padding: 15px 10px;
+                font-size: 0.9rem;
+            }
+            
+            .projects-container, 
+            .activities-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .skill-category {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="profile-info">
+                <h1>김민수 (Kim Minsu)</h1>
+                <h2>영문학 & 컴퓨터과학 복수전공 | 소프트웨어 개발자</h2>
+                <div class="contact-info">
+                    <a href="mailto:kimminsu@email.com">📧 kimminsu@email.com</a>
+                    <a href="tel:01012345678">📱 010-1234-5678</a>
+                    <a href="https://linkedin.com/in/kimminsu" target="_blank">🔗 LinkedIn</a>
+                    <a href="https://github.com/kimminsu" target="_blank">🐙 GitHub</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <ul class="nav-links">
+                <li><a href="#about">소개</a></li>
+                <li><a href="#skills">기술 스택</a></li>
+                <li><a href="#projects">프로젝트</a></li>
+                <li><a href="#education">교육 및 자격증</a></li>
+                <li><a href="#activities">활동 및 수상</a></li>
+                <li><a href="#additional">추가 정보</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>소개</h2>
+            </div>
+            <div class="about-content">
+                <p>컴퓨터과학의 기술적 전문성과 영문학에서 얻은 커뮤니케이션 능력을 결합하여 혁신적인 소프트웨어 솔루션을 개발하는 열정을 가진 개발자입니다. 서울대학교에서 영문학과 컴퓨터과학을 복수전공하며 문제 해결 능력과 창의적 사고를 키웠습니다. 교내 컴퓨터 동아리 'Code Creators'에서 3년간 활동하며 다양한 프로젝트를 통해 실무 경험을 쌓았습니다. 마이크로소프트의 혁신적인 기술과 포용적인 문화에 기여하고자 합니다.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>마이크로소프트의 혁신적인 기술과 제품을 활용하여 더 나은 디지털 경험을 창출하는데 기여하고 싶습니다. 영문학과 컴퓨터과학의 융합적 시각으로 기술적 문제 해결과 인간 중심 설계를 균형 있게 추구하며, 마이크로소프트의 "Empower every person and every organization on the planet to achieve more"라는 미션에 동참하고자 합니다.</p>
+                <div class="footer-links">
+                    <a href="mailto:kimminsu@email.com">이메일</a>
+                    <a href="https://linkedin.com/in/kimminsu" target="_blank">LinkedIn</a>
+                    <a href="https://github.com/kimminsu" target="_blank">GitHub</a>
+                </div>
+                <div class="copyright">
+                    © 2025 김민수. All Rights Reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 스크롤 시 네비게이션 바 효과
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            } else {
+                nav.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+            }
+        });
+        
+        // 스무스 스크롤링
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+    <!-- Additional Info Section -->
+    <section id="additional" style="background-color: var(--ms-light-gray);">
+        <div class="container">
+            <div class="section-title">
+                <h2>추가 정보</h2>
+            </div>
+            
+            <!-- Languages -->
+            <h3 style="text-align: center; margin-bottom: 30px;">언어 능력</h3>
+            <div class="languages-container">
+                <div class="language-item">
+                    <div class="language-name">한국어</div>
+                    <div class="language-level">모국어</div>
+                </div>
+                <div class="language-item">
+                    <div class="language-name">영어</div>
+                    <div class="language-level">유창함<br>(TOEIC 970, OPIc AL)</div>
+                </div>
+                <div class="language-item">
+                    <div class="language-name">일본어</div>
+                    <div class="language-level">중급<br>(JLPT N2)</div>
+                </div>
+            </div>
+            
+            <!-- Interests -->
+            <h3 style="text-align: center; margin: 40px 0 30px;">관심 분야</h3>
+            <div class="interests-container">
+                <div class="interest-item">
+                    <h3>클라우드 네이티브 애플리케이션</h3>
+                    <p>클라우드 환경에 최적화된 애플리케이션 설계와 개발에 관심이 있습니다.</p>
+                </div>
+                <div class="interest-item">
+                    <h3>자연어 처리</h3>
+                    <p>컴퓨터 언어학과 문학 텍스트 분석에 AI를 활용하는 방법을 연구합니다.</p>
+                </div>
+                <div class="interest-item">
+                    <h3>디지털 인문학</h3>
+                    <p>인문학적 지식과 기술을 결합한 새로운 연구 방법론에 관심이 있습니다.</p>
+                </div>
+                <div class="interest-item">
+                    <h3>사용자 경험 설계</h3>
+                    <p>사용자 중심의 직관적인 인터페이스 설계에 집중합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" style="background-color: var(--ms-light-gray);">
+        <div class="container">
+            <div class="section-title">
+                <h2>기술 스택</h2>
+            </div>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>프로그래밍 언어</h3>
+                    <div class="skill-item">
+                        <span>C#</span>
+                        <span class="star-rating">★★★★★</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>JavaScript/TypeScript</span>
+                        <span class="star-rating">★★★★☆</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>Python</span>
+                        <span class="star-rating">★★★★☆</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>Java</span>
+                        <span class="star-rating">★★★☆☆</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>SQL</span>
+                        <span class="star-rating">★★★★☆</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>프레임워크 & 기술</h3>
+                    <div class="skill-item">
+                        <span>.NET Core/Framework</span>
+                        <span class="star-rating">★★★★★</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>ASP.NET</span>
+                        <span class="star-rating">★★★★☆</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>React</span>
+                        <span class="star-rating">★★★★☆</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>Azure Cloud Services</span>
+                        <span class="star-rating">★★★★☆</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>Entity Framework</span>
+                        <span class="star-rating">★★★★☆</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>Power Platform</span>
+                        <span class="star-rating">★★★☆☆</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>도구 & 환경</h3>
+                    <div class="skill-item">
+                        <span>Visual Studio/VS Code</span>
+                        <span class="star-rating">★★★★★</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>Git/GitHub</span>
+                        <span class="star-rating">★★★★★</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>Azure DevOps</span>
+                        <span class="star-rating">★★★★☆</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>Docker</span>
+                        <span class="star-rating">★★★☆☆</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>CI/CD 파이프라인</span>
+                        <span class="star-rating">★★★☆☆</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>소프트 스킬</h3>
+                    <div class="skill-item">
+                        <span>기술 문서 작성</span>
+                        <span class="star-rating">★★★★★</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>팀 커뮤니케이션</span>
+                        <span class="star-rating">★★★★★</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>프로젝트 관리</span>
+                        <span class="star-rating">★★★★☆</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>문제 해결 능력</span>
+                        <span class="star-rating">★★★★★</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>사용자 경험 설계</span>
+                        <span class="star-rating">★★★☆☆</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>프로젝트</h2>
+            </div>
+            <div class="projects-container">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-image" style="background-color: #50a3d9;">
+                        LiteraryLens
+                    </div>
+                    <div class="project-info">
+                        <h3>LiteraryLens: Azure 기반 문학 텍스트 분석 플랫폼</h3>
+                        <div class="project-meta">개인 프로젝트 | 2024.01 - 2024.05</div>
+                        <div class="tech-stack">
+                            <span class="tech-tag">C#</span>
+                            <span class="tech-tag">.NET Core</span>
+                            <span class="tech-tag">Azure Cognitive Services</span>
+                            <span class="tech-tag">Azure Functions</span>
+                            <span class="tech-tag">React</span>
+                        </div>
+                        <p>영문학과 컴퓨터과학을 결합한 개인 프로젝트로, 문학 작품을 분석하는 웹 애플리케이션입니다.</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Azure Cognitive Services의 Text Analytics와 Language Understanding 서비스를 활용하여 문학 작품의 감정, 주제, 문체를 분석</li>
+                            <li>작품 간의 연관성, 작가별 스타일 비교, 시대별 문학 트렌드를 시각화하는 대시보드 구현</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="https://github.com/kimminsu/literarylens" target="_blank">GitHub</a>
+                            <a href="https://literarylens.azurewebsites.net" target="_blank">라이브 데모</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-image" style="background-color: #0078d4;">
+                        TeamStudy
+                    </div>
+                    <div class="project-info">
+                        <h3>TeamStudy: Microsoft Teams 교육용 확장 앱</h3>
+                        <div class="project-meta">동아리 팀 프로젝트 | 역할: 팀 리더, 백엔드 개발 | 2023.09 - 2023.12</div>
+                        <div class="tech-stack">
+                            <span class="tech-tag">C#</span>
+                            <span class="tech-tag">ASP.NET Core</span>
+                            <span class="tech-tag">Microsoft Graph API</span>
+                            <span class="tech-tag">Azure AD</span>
+                            <span class="tech-tag">SQL Server</span>
+                        </div>
+                        <p>대학 컴퓨터 동아리 'Code Creators'에서 4명의 팀원과 함께 개발한 Microsoft Teams 교육용 확장 애플리케이션입니다.</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Microsoft Teams API와 Graph API를 활용한 실시간 학습 협업 도구 개발</li>
+                            <li>학습 자료 공유, 퀴즈 생성, 피드백 시스템, 자동 출석 체크 기능 구현</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="https://github.com/codecreators/teamstudy" target="_blank">GitHub</a>
+                            <a href="https://youtu.be/teamstudy-demo" target="_blank">시연 영상</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-image" style="background-color: #742774;">
+                        SmartWorkflow
+                    </div>
+                    <div class="project-info">
+                        <h3>SmartWorkflow: Power Platform 비즈니스 솔루션</h3>
+                        <div class="project-meta">인턴십 프로젝트 | 2023.06 - 2023.08</div>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Power Apps</span>
+                            <span class="tech-tag">Power Automate</span>
+                            <span class="tech-tag">SharePoint</span>
+                            <span class="tech-tag">Microsoft Dataverse</span>
+                        </div>
+                        <p>국내 대기업 IT 부서 인턴십에서 업무 자동화 시스템을 개발한 프로젝트입니다.</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>문서 승인 프로세스를 Power Apps와 Power Automate를 활용하여 자동화</li>
+                            <li>SharePoint와 Dataverse를 연동한 문서 관리 시스템 구축</li>
+                            <li>기존 수동 프로세스 대비 업무 처리 시간 70% 단축 달성</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="https://myportfolio.com/kimminsu/smartworkflow" target="_blank">케이스 스터디</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="project-card">
+                    <div class="project-image" style="background-color: #107c10;">
+                        TranslateBuddy
+                    </div>
+                    <div class="project-info">
+                        <h3>TranslateBuddy: 오픈소스 번역 지원 도구</h3>
+                        <div class="project-meta">오픈소스 기여 | 2022.10 - 현재</div>
+                        <div class="tech-stack">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Azure Cognitive Services</span>
+                        </div>
+                        <p>기술 문서 번역을 돕는 오픈소스 도구에 기여한 프로젝트입니다.</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>오픈소스 기술 문서 번역 작업을 지원하는 웹 애플리케이션 개발</li>
+                            <li>Azure Cognitive Services의 Translator API를 활용한 기계 번역 기능 구현</li>
+                            <li>영문학적 맥락을 고려한 용어 일관성 검사 알고리즘 개발</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="https://github.com/opensource/translatebuddy" target="_blank">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" style="background-color: var(--ms-light-gray);">
+        <div class="container">
+            <div class="section-title">
+                <h2>교육 및 자격증</h2>
+            </div>
+            <div class="education-timeline">
+                <!-- Education -->
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>서울대학교</h3>
+                        <span class="timeline-date">2020.03 - 2024.02</span>
+                    </div>
+                    <div class="timeline-content">
+                        <p>영문학과 학사 (주전공)</p>
+                        <p>컴퓨터과학과 학사 (복수전공)</p>
+                        <p>학점: 4.2/4.5 (전공 평점: 4.3/4.5)</p>
+                        <p style="margin-top: 10px;"><strong>주요 수강 과목:</strong></p>
+                        <ul style="columns: 2; margin-left: 20px; margin-top: 5px;">
+                            <li>자료구조 및 알고리즘</li>
+                            <li>데이터베이스 시스템</li>
+                            <li>클라우드 컴퓨팅</li>
+                            <li>소프트웨어 공학</li>
+                            <li>인공지능 개론</li>
+                            <li>영미문학과 디지털 인문학</li>
+                            <li>고급 기술 작문 (영문)</li>
+                            <li>디지털 스토리텔링</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Certifications -->
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>Microsoft Certified: Azure Developer Associate</h3>
+                        <span class="timeline-date">2023.07</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>Microsoft Certified: Power Platform App Maker Associate</h3>
+                        <span class="timeline-date">2023.09</span>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>AWS Certified Developer – Associate</h3>
+                        <span class="timeline-date">2024.01</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="activities">
+        <div class="container">
+            <div class="section-title">
+                <h2>활동 및 수상</h2>
+            </div>
+            <div class="activities-container">
+                <!-- Club Activities -->
+                <div class="activity-card">
+                    <h3>동아리 활동</h3>
+                    <p><strong>Code Creators 컴퓨터 동아리</strong> (2021.03 - 2024.02)</p>
+                    <ul>
+                        <li>부회장 (2023.03 - 2024.02)</li>
+                        <li>기술 세미나 시리즈 "MS 기술 스택 마스터하기" 기획 및 진행</li>
+                        <li>교내 해커톤 2회 주최 및 운영</li>
+                    </ul>
+                </div>
+                
+                <!-- Awards -->
+                <div class="activity-card">
+                    <h3>수상 경력</h3>
+                    <ul>
+                        <li><strong>Microsoft Student Partner Hackathon</strong> 최우수상 (2023.11)</li>
+                        <li><strong>교내 소프트웨어 경진대회</strong> 대상 (2023.10)</li>
+                        <li><strong>전국 대학생 앱 개발 경진대회</strong> 장려상 (2022.07)</li>
+                    </ul>
+                </div>
+                
+                <!-- Volunteer Work -->
+                <div class="activity-card">
+                    <h3>봉사활동</h3>
+                    <p><strong>디지털 리터러시 교육 봉사</strong> (2022.01 - 2023.12)</p>
+                    <ul>
+                        <li>지역 노인복지관에서 디지털 기기 활용 교육 진행</li>
+                        <li>Microsoft Office 활용 교육 커리큘럼 개발 및 교육 진행</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
