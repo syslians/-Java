@@ -1,0 +1,24 @@
+```java
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class Main {
+    private static final int[] COINS = {500, 100, 50, 10, 5, 1};
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        final int price = Integer.parseInt(br.readLine().trim());
+
+        int change = 1000 - price;
+
+        int count = 0;
+        for (int it : COINS) {
+            count += change / it;
+            change %= it;
+        }
+
+        System.out.println(count);
+    }
+}
+```
