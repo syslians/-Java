@@ -1,0 +1,71 @@
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Main {
+    private static BufferedReader bufferedReader;
+    private static StringTokenizer stringTokenizer;
+    private static StringBuilder stringBuilder;
+
+    private static void init() {
+        bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        stringBuilder = new StringBuilder();
+    }
+
+    private static int getValue() {
+        if (stringTokenizer == null || !stringTokenizer.hasMoreTokens()) {
+            try {
+                stringTokenizer = new StringTokenizer(bufferedReader.readLine(), " ");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        return Integer.parseInt(stringTokenizer.nextToken());
+    }
+
+    public static void main(String[] args) {
+        init();
+
+        int T = getValue();
+
+        int[] input = new int[T];
+        int max = 0;
+        for (int i = 0; i < T; i++) {
+            input[i] = getValue();
+            if (max < input[i]) {
+                max = input[i];
+            }
+        }
+
+
+        int[] dp = new int[max + 1];
+        dp[1] = 1;
+        if(max == 1) {
+            System.out.println(dp[max]);
+            return;
+        }
+        dp[2] = 2;
+        if(max == 2) {
+            System.out.println(dp[max]);
+            return;
+        }
+        dp[3] = 4;
+        if(max == 3) {
+            System.out.println(dp[max]);
+            return;
+        }
+        for (int i = 4; i < dp.length; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
+        }
+
+        for (int i = 0; i < T; i++) {
+            stringBuilder.append(dp[input[i]]).append("\n");
+        }
+
+        System.out.println(stringBuilder.toString().trim());
+    }
+}
+```
